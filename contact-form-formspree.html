@@ -1,0 +1,209 @@
+<!-- Replace your current contact form section with this Formspree version -->
+<form class="contact__form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="contact__form-div">
+        <label class="contact__form-tag">Name *</label>
+        <input type="text" name="name" class="contact__form-input" required>
+        <span class="field-error"></span>
+    </div>
+
+    <div class="contact__form-div">
+        <label class="contact__form-tag">Email *</label>
+        <input type="email" name="email" class="contact__form-input" required>
+        <span class="field-error"></span>
+    </div>
+
+    <div class="contact__form-div">
+        <label class="contact__form-tag">Subject</label>
+        <input type="text" name="subject" class="contact__form-input" placeholder="What's this about?">
+        <span class="field-error"></span>
+    </div>
+
+    <div class="contact__form-div">
+        <label class="contact__form-tag">Message *</label>
+        <textarea name="message" class="contact__form-input" rows="6" required
+            placeholder="Tell me about your project or inquiry..."></textarea>
+        <span class="field-error"></span>
+    </div>
+
+    <!-- Hidden field to help with spam filtering -->
+    <input type="hidden" name="_subject" value="New contact form submission from portfolio">
+    <input type="hidden" name="_next" value="thank-you.html">
+
+    <button type="submit" class="button button--primary" id="submit-btn">
+        <span class="button-text">Send Message</span>
+        <i class="fas fa-paper-plane button-icon"></i>
+    </button>
+
+    <div class="contact__form-message" id="form-message"></div>
+</form>
+
+<script>
+    // Formspree form submission
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const submitBtn = document.getElementById('submit-btn');
+        const formMessage = document.getElementById('form-message');
+        const buttonText = submitBtn.querySelector('.button-text');
+        const buttonIcon = submitBtn.querySelector('.button-icon');
+
+        // Clear previous messages and errors
+        clearFormErrors();
+        hideFormMessage();
+
+        // Validate form
+        if (!validateForm(form)) {
+            showFormMessage('Please fill in all required fields correctly.', 'error');
+            return;
+        }
+
+        // Show loading state
+        submitBtn.classList.add('button--loading');
+        submitBtn.disabled = true;
+        buttonText.textContent = 'Sending...';
+        buttonIcon.className = 'fas fa-spinner fa-spin';
+
+        // Send form data to Formspree
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    showFormMessage('Thank you! Your message has been sent successfully. I\'ll get back to you soon.', 'success');
+                    form.reset();
+                    clearFormErrors();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwnProperty.call(data, 'errors')) {
+                            showFormMessage(data["errors"].map(error => error["message"]).join(", "), 'error');
+                        } else {
+                            showFormMessage('Oops! There was a problem submitting your form', 'error');
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showFormMessage('Sorry, there was an error sending your message. Please try again or contact me directly.', 'error');
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.classList.remove('button--loading');
+                submitBtn.disabled = false;
+                buttonText.textContent = 'Send Message';
+                buttonIcon.className = 'fas fa-paper-plane';
+            });
+    });
+
+    function validateForm(form) {
+        const formData = new FormData(form);
+        let isValid = true;
+
+        // Validate name
+        const name = formData.get('name').trim();
+        if (!name) {
+            showFieldError('name', 'Name is required');
+            isValid = false;
+        } else if (name.length < 2) {
+            showFieldError('name', 'Name must be at least 2 characters');
+            isValid = false;
+        }
+
+        // Validate email
+        const email = formData.get('email').trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            showFieldError('email', 'Email is required');
+            isValid = false;
+        } else if (!emailRegex.test(email)) {
+            showFieldError('email', 'Please enter a valid email address');
+            isValid = false;
+        }
+
+        // Validate message
+        const message = formData.get('message').trim();
+        if (!message) {
+            showFieldError('message', 'Message is required');
+            isValid = false;
+        } else if (message.length < 10) {
+            showFieldError('message', 'Message must be at least 10 characters');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function showFieldError(fieldName, message) {
+        const field = document.querySelector(`[name="${fieldName}"]`);
+        const fieldDiv = field.closest('.contact__form-div');
+        const errorSpan = fieldDiv.querySelector('.field-error');
+
+        fieldDiv.classList.add('error');
+        errorSpan.textContent = message;
+    }
+
+    function clearFormErrors() {
+        const errorDivs = document.querySelectorAll('.contact__form-div.error');
+        errorDivs.forEach(div => {
+            div.classList.remove('error');
+            div.querySelector('.field-error').textContent = '';
+        });
+    }
+
+    function showFormMessage(message, type) {
+        const formMessage = document.getElementById('form-message');
+        formMessage.textContent = message;
+        formMessage.className = `contact__form-message ${type} show`;
+    }
+
+    function hideFormMessage() {
+        const formMessage = document.getElementById('form-message');
+        formMessage.classList.remove('show');
+    }
+
+    // Real-time validation
+    document.querySelectorAll('.contact__form-input').forEach(input => {
+        input.addEventListener('blur', function () {
+            const fieldDiv = this.closest('.contact__form-div');
+            const errorSpan = fieldDiv.querySelector('.field-error');
+
+            // Clear previous error
+            fieldDiv.classList.remove('error');
+            errorSpan.textContent = '';
+
+            // Validate field
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                return; // Don't show error on blur if field is empty but required
+            }
+
+            if (this.name === 'email' && this.value.trim()) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(this.value.trim())) {
+                    showFieldError(this.name, 'Please enter a valid email address');
+                }
+            }
+
+            if (this.name === 'name' && this.value.trim() && this.value.trim().length < 2) {
+                showFieldError(this.name, 'Name must be at least 2 characters');
+            }
+
+            if (this.name === 'message' && this.value.trim() && this.value.trim().length < 10) {
+                showFieldError(this.name, 'Message must be at least 10 characters');
+            }
+        });
+
+        input.addEventListener('input', function () {
+            // Clear error state when user starts typing
+            const fieldDiv = this.closest('.contact__form-div');
+            if (fieldDiv.classList.contains('error')) {
+                fieldDiv.classList.remove('error');
+                fieldDiv.querySelector('.field-error').textContent = '';
+            }
+        });
+    });
+</script>
