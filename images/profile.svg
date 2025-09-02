@@ -1,0 +1,6 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="300" rx="150" fill="#2563eb"/>
+<circle cx="150" cy="120" r="40" fill="#ffffff"/>
+<path d="M100 220C100 190 120 170 150 170C180 170 200 190 200 220V250H100V220Z" fill="#ffffff"/>
+<text x="150" y="280" text-anchor="middle" fill="#ffffff" font-family="Inter" font-size="14" font-weight="600">SONU ABRAHAM</text>
+</svg>

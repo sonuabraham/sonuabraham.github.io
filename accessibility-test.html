@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Accessibility Test Results</h1>
+    <div id="test-results"></div>
+
+    <script>
+        // Simple accessibility tests
+        function runAccessibilityTests() {
+            const results = [];
+
+            // Test 1: Check for skip link
+            const skipLink = document.querySelector('.skip-to-content');
+            results.push({
+                test: 'Skip to content link',
+                passed: !!skipLink,
+                message: skipLink ? 'Skip link found' : 'Skip link missing'
+            });
+
+            // Test 2: Check for proper heading hierarchy
+            const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            const hasH1 = document.querySelector('h1');
+            results.push({
+                test: 'Heading hierarchy',
+                passed: !!hasH1,
+                message: hasH1 ? `Found ${headings.length} headings with proper H1` : 'No H1 found'
+            });
+
+            // Test 3: Check for ARIA labels on interactive elements
+            const buttons = document.querySelectorAll('button');
+            const buttonsWithLabels = Array.from(buttons).filter(btn =>
+                btn.hasAttribute('aria-label') || btn.textContent.trim() || btn.hasAttribute('aria-labelledby')
+            );
+            results.push({
+                test: 'Button accessibility',
+                passed: buttons.length === buttonsWithLabels.length,
+                message: `${buttonsWithLabels.length}/${buttons.length} buttons have proper labels`
+            });
+
+            // Test 4: Check for alt text on images
+            const images = document.querySelectorAll('img');
+            const imagesWithAlt = Array.from(images).filter(img => img.hasAttribute('alt'));
+            results.push({
+                test: 'Image alt text',
+                passed: images.length === imagesWithAlt.length,
+                message: `${imagesWithAlt.length}/${images.length} images have alt text`
+            });
+
+            // Test 5: Check for form labels
+            const inputs = document.querySelectorAll('input, textarea, select');
+            const inputsWithLabels = Array.from(inputs).filter(input => {
+                const id = input.id;
+                return id && document.querySelector(`label[for="${id}"]`) || input.hasAttribute('aria-label');
+            });
+            results.push({
+                test: 'Form labels',
+                passed: inputs.length === inputsWithLabels.length,
+                message: `${inputsWithLabels.length}/${inputs.length} form elements have labels`
+            });
+
+            // Test 6: Check for ARIA roles
+            const elementsWithRoles = document.querySelectorAll('[role]');
+            results.push({
+                test: 'ARIA roles',
+                passed: elementsWithRoles.length > 0,
+                message: `Found ${elementsWithRoles.length} elements with ARIA roles`
+            });
+
+            return results;
+        }
+
+        // Load the main page in an iframe and test it
+        const iframe = document.createElement('iframe');
+        iframe.src = 'index.html';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        iframe.onload = function () {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+            // Override document for tests
+            const originalDocument = document;
+            window.document = iframeDoc;
+
+            const results = runAccessibilityTests();
+
+            // Restore original document
+            window.document = originalDocument;
+
+            // Display results
+            const resultsContainer = document.getElementById('test-results');
+            results.forEach(result => {
+                const div = document.createElement('div');
+                div.className = `test-result ${result.passed ? 'pass' : 'fail'}`;
+                div.innerHTML = `
+                    <strong>${result.test}:</strong> 
+                    ${result.passed ? '✓ PASS' : '✗ FAIL'} - 
+                    ${result.message}
+                `;
+                resultsContainer.appendChild(div);
+            });
+
+            // Summary
+            const passedTests = results.filter(r => r.passed).length;
+            const totalTests = results.length;
+            const summary = document.createElement('div');
+            summary.className = 'test-result info';
+            summary.innerHTML = `<strong>Summary:</strong> ${passedTests}/${totalTests} tests passed`;
+            resultsContainer.insertBefore(summary, resultsContainer.firstChild);
+        };
+    </script>
+</body>
+
+</html>

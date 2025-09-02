@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Essential styles inline to avoid loading issues */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +19,6 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #1e293b;
-            background-color: #ffffff;
         }
 
         .container {
@@ -67,11 +67,16 @@
         }
 
         .nav__link:hover,
-        .nav__link.active {
+        .nav__link.active-link {
             color: #2563eb;
         }
 
-        /* Main Content */
+        .nav__toggle,
+        .nav__close {
+            display: none;
+        }
+
+        /* Main */
         .main {
             padding-top: 80px;
         }
@@ -93,7 +98,7 @@
             margin-bottom: 3rem;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -185,7 +190,7 @@
             box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
         }
 
-        /* About Section */
+        /* About */
         .about {
             background-color: #f8fafc;
         }
@@ -194,7 +199,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
         }
 
         .about__text {
@@ -231,9 +235,9 @@
             font-size: 0.9rem;
         }
 
-        .skills__grid {
+        .skills__content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
 
@@ -251,11 +255,20 @@
             color: #1e293b;
         }
 
-        .skills__item {
+        .skills__data {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills__info {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills__icon {
+            font-size: 1.5rem;
+            color: #2563eb;
         }
 
         .skills__name {
@@ -265,6 +278,7 @@
         .skills__level {
             color: #64748b;
             font-size: 0.9rem;
+            margin-left: auto;
         }
 
         .skills__bar {
@@ -272,7 +286,6 @@
             height: 6px;
             background: #e2e8f0;
             border-radius: 3px;
-            margin-top: 0.5rem;
             overflow: hidden;
         }
 
@@ -283,7 +296,7 @@
             transition: width 2s ease;
         }
 
-        /* Projects Section */
+        /* Projects */
         .projects__filters {
             display: flex;
             justify-content: center;
@@ -292,7 +305,7 @@
             flex-wrap: wrap;
         }
 
-        .projects__filter {
+        .projects__item {
             padding: 0.5rem 1.5rem;
             background: #f1f5f9;
             color: #64748b;
@@ -302,19 +315,19 @@
             transition: all 0.3s;
         }
 
-        .projects__filter.active,
-        .projects__filter:hover {
+        .projects__item.active-work,
+        .projects__item:hover {
             background: #2563eb;
             color: white;
         }
 
-        .projects__grid {
+        .projects__content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
-        .project__card {
+        .projects__card {
             background: white;
             border-radius: 1rem;
             overflow: hidden;
@@ -322,46 +335,41 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .project__card:hover {
+        .projects__card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .project__image {
+        .projects__img {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, #2563eb, #f59e0b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            object-fit: cover;
         }
 
-        .project__content {
+        .projects__data {
             padding: 1.5rem;
         }
 
-        .project__title {
+        .projects__title {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .project__description {
+        .projects__description {
             color: #64748b;
             margin-bottom: 1rem;
             line-height: 1.6;
         }
 
-        .project__tech {
+        .projects__technologies {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
 
-        .tech__tag {
+        .projects__tech {
             padding: 0.25rem 0.75rem;
             background: #f1f5f9;
             color: #64748b;
@@ -369,12 +377,12 @@
             font-size: 0.8rem;
         }
 
-        .project__links {
+        .projects__buttons {
             display: flex;
             gap: 1rem;
         }
 
-        .project__link {
+        .projects__button {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -387,11 +395,11 @@
             transition: background 0.3s;
         }
 
-        .project__link:hover {
+        .projects__button:hover {
             background: #1d4ed8;
         }
 
-        /* Contact Section */
+        /* Contact */
         .contact {
             background: #f8fafc;
         }
@@ -421,20 +429,73 @@
             transform: translateY(-3px);
         }
 
-        .contact__icon {
+        .contact__card-icon {
             font-size: 2rem;
             color: #2563eb;
             margin-bottom: 1rem;
         }
 
-        .contact__title {
+        .contact__card-title {
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .contact__data {
+        .contact__card-data {
             color: #64748b;
             margin-bottom: 1rem;
+        }
+
+        .contact__button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .contact__button:hover {
+            color: #1d4ed8;
+        }
+
+        .contact__social {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .contact__social-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact__social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #f1f5f9;
+            color: #64748b;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .contact__social-link:hover {
+            background: #2563eb;
+            color: white;
         }
 
         .contact__form {
@@ -444,19 +505,12 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .form__group {
+        .contact__form-div {
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
-        .form__label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .form__input,
-        .form__textarea {
+        .contact__form-input {
             width: 100%;
             padding: 0.75rem;
             border: 2px solid #e5e7eb;
@@ -465,15 +519,19 @@
             transition: border-color 0.3s;
         }
 
-        .form__input:focus,
-        .form__textarea:focus {
+        .contact__form-input:focus {
             outline: none;
             border-color: #2563eb;
         }
 
-        .form__textarea {
-            resize: vertical;
-            min-height: 120px;
+        .contact__form-tag {
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            background: white;
+            padding: 0 0.5rem;
+            font-size: 0.8rem;
+            color: #64748b;
         }
 
         /* Footer */
@@ -490,10 +548,11 @@
             margin-bottom: 1rem;
         }
 
-        .footer__links {
+        .footer__list {
             display: flex;
             justify-content: center;
             gap: 2rem;
+            list-style: none;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
@@ -515,7 +574,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .social__link {
+        .footer__social-link {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -528,7 +587,7 @@
             transition: background 0.3s;
         }
 
-        .social__link:hover {
+        .footer__social-link:hover {
             background: #2563eb;
         }
 
@@ -537,7 +596,7 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
             .nav__list {
                 display: none;
@@ -562,11 +621,11 @@
                 grid-template-columns: 1fr;
             }
 
-            .skills__grid {
+            .skills__content {
                 grid-template-columns: 1fr;
             }
 
-            .projects__grid {
+            .projects__content {
                 grid-template-columns: 1fr;
             }
         }
@@ -579,7 +638,7 @@
         <nav class="nav container">
             <a href="#home" class="nav__logo">Sonu Abraham</a>
             <ul class="nav__list">
-                <li><a href="#home" class="nav__link active">Home</a></li>
+                <li><a href="#home" class="nav__link active-link">Home</a></li>
                 <li><a href="#about" class="nav__link">About</a></li>
                 <li><a href="#projects" class="nav__link">Projects</a></li>
                 <li><a href="#contact" class="nav__link">Contact</a></li>
@@ -600,15 +659,10 @@
                         <h2 class="hero__subtitle">Professional Developer</h2>
                         <p class="hero__description">
                             Passionate about creating innovative solutions and bringing ideas to life through code.
-                            I specialize in modern web technologies and user experience design.
                         </p>
                         <div class="hero__buttons">
-                            <a href="#projects" class="button button--primary">
-                                View My Work <i class="fas fa-arrow-right"></i>
-                            </a>
-                            <a href="#contact" class="button button--secondary">
-                                Contact Me <i class="fas fa-envelope"></i>
-                            </a>
+                            <a href="#projects" class="button button--primary">View My Work</a>
+                            <a href="#contact" class="button button--secondary">Contact Me</a>
                         </div>
                     </div>
                     <div class="hero__image">
@@ -629,20 +683,20 @@
         <section class="about section" id="about">
             <div class="container">
                 <h2 class="section__title">About Me</h2>
-                <p class="section__subtitle">My introduction</p>
+                <span class="section__subtitle">My introduction</span>
 
                 <div class="about__content">
                     <div class="about__info">
                         <p class="about__text">
                             I am a passionate frontend developer with over 3 years of experience creating modern,
-                            responsive web applications. I specialize in JavaScript, React, and modern CSS frameworks,
-                            with a strong focus on user experience and performance optimization.
+                            responsive web applications. I specialize in JavaScript, React, and modern CSS
+                            frameworks, with a strong focus on user experience and performance optimization.
                         </p>
                         <p class="about__text">
                             My journey in web development started during my computer science studies, and I've since
                             worked on diverse projects ranging from e-commerce platforms to data visualization
-                            dashboards.
-                            I'm always eager to learn new technologies and contribute to innovative solutions.
+                            dashboards. I'm always eager to learn new technologies and contribute to innovative
+                            solutions.
                         </p>
 
                         <div class="about__stats">
@@ -668,92 +722,116 @@
                     </div>
 
                     <div class="about__skills">
-                        <div class="skills__grid">
+                        <div class="skills__content">
                             <div class="skills__group">
-                                <h3 class="skills__group-title">Frontend Development</h3>
+                                <h4 class="skills__group-title">Frontend Development</h4>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">HTML5</span>
-                                        <span class="skills__level">Advanced</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-html5 skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">HTML5</span>
+                                            <span class="skills__level">Advanced</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 90%"></div>
                                     </div>
                                 </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 90%"></div>
-                                </div>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">CSS3</span>
-                                        <span class="skills__level">Advanced</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-css3-alt skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">CSS3</span>
+                                            <span class="skills__level">Advanced</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 85%"></div>
                                     </div>
                                 </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 85%"></div>
-                                </div>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">JavaScript</span>
-                                        <span class="skills__level">Intermediate</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-js-square skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">JavaScript</span>
+                                            <span class="skills__level">Intermediate</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 75%"></div>
                                     </div>
                                 </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 75%"></div>
-                                </div>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">React</span>
-                                        <span class="skills__level">Intermediate</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-react skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">React</span>
+                                            <span class="skills__level">Intermediate</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 70%"></div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 70%"></div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="skills__group">
-                                <h3 class="skills__group-title">Backend & Tools</h3>
+                                <h4 class="skills__group-title">Backend & Tools</h4>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">Node.js</span>
-                                        <span class="skills__level">Basic</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-node-js skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">Node.js</span>
+                                            <span class="skills__level">Basic</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 60%"></div>
                                     </div>
                                 </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 60%"></div>
-                                </div>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">Git</span>
-                                        <span class="skills__level">Intermediate</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-git-alt skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">Git</span>
+                                            <span class="skills__level">Intermediate</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 80%"></div>
                                     </div>
                                 </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 80%"></div>
-                                </div>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">MongoDB</span>
-                                        <span class="skills__level">Basic</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fas fa-database skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">MongoDB</span>
+                                            <span class="skills__level">Basic</span>
+                                        </div>
+                                    </div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 55%"></div>
                                     </div>
                                 </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 55%"></div>
-                                </div>
 
-                                <div class="skills__item">
-                                    <div>
-                                        <span class="skills__name">Figma</span>
-                                        <span class="skills__level">Intermediate</span>
+                                <div class="skills__data">
+                                    <div class="skills__info">
+                                        <i class="fab fa-figma skills__icon"></i>
+                                        <div class="skills__details">
+                                            <span class="skills__name">Figma</span>
+                                            <span class="skills__level">Intermediate</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="skills__bar">
-                                    <div class="skills__percentage" style="width: 65%"></div>
+                                    <div class="skills__bar">
+                                        <div class="skills__percentage" style="width: 65%"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -766,158 +844,163 @@
         <section class="projects section" id="projects">
             <div class="container">
                 <h2 class="section__title">Projects</h2>
-                <p class="section__subtitle">Most recent work</p>
+                <span class="section__subtitle">Most recent work</span>
 
                 <div class="projects__filters">
-                    <button class="projects__filter active" data-filter="all">All</button>
-                    <button class="projects__filter" data-filter="web">Web</button>
-                    <button class="projects__filter" data-filter="app">App</button>
-                    <button class="projects__filter" data-filter="design">Design</button>
+                    <button class="projects__item active-work" data-filter="all">All</button>
+                    <button class="projects__item" data-filter="web">Web</button>
+                    <button class="projects__item" data-filter="app">App</button>
+                    <button class="projects__item" data-filter="design">Design</button>
                 </div>
 
-                <div class="projects__grid">
-                    <div class="project__card" data-category="web">
-                        <div class="project__image">
+                <div class="projects__content">
+                    <!-- Project 1 -->
+                    <div class="projects__card" data-category="web">
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #2563eb, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <div class="project__content">
-                            <h3 class="project__title">E-Commerce Platform</h3>
-                            <p class="project__description">
-                                A modern e-commerce platform with shopping cart, payment integration, and admin
-                                dashboard.
-                            </p>
-                            <div class="project__tech">
-                                <span class="tech__tag">React</span>
-                                <span class="tech__tag">Node.js</span>
-                                <span class="tech__tag">MongoDB</span>
-                                <span class="tech__tag">Stripe</span>
+                        <div class="projects__data">
+                            <h3 class="projects__title">E-Commerce Platform</h3>
+                            <p class="projects__description">A modern e-commerce platform with shopping cart, payment
+                                integration, and admin dashboard.</p>
+                            <div class="projects__technologies">
+                                <span class="projects__tech">React</span>
+                                <span class="projects__tech">Node.js</span>
+                                <span class="projects__tech">MongoDB</span>
+                                <span class="projects__tech">Stripe</span>
                             </div>
-                            <div class="project__links">
-                                <a href="#" class="project__link">
+                            <div class="projects__buttons">
+                                <a href="#" class="projects__button">
                                     <i class="fas fa-external-link-alt"></i> Demo
                                 </a>
-                                <a href="#" class="project__link">
+                                <a href="#" class="projects__button">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project__card" data-category="app">
-                        <div class="project__image">
+                    <!-- Project 2 -->
+                    <div class="projects__card" data-category="app">
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #2563eb, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                             <i class="fas fa-tasks"></i>
                         </div>
-                        <div class="project__content">
-                            <h3 class="project__title">Task Management App</h3>
-                            <p class="project__description">
-                                A collaborative task management application with real-time updates and team features.
-                            </p>
-                            <div class="project__tech">
-                                <span class="tech__tag">React Native</span>
-                                <span class="tech__tag">Firebase</span>
-                                <span class="tech__tag">Redux</span>
+                        <div class="projects__data">
+                            <h3 class="projects__title">Task Management App</h3>
+                            <p class="projects__description">A collaborative task management application with real-time
+                                updates and team features.</p>
+                            <div class="projects__technologies">
+                                <span class="projects__tech">React Native</span>
+                                <span class="projects__tech">Firebase</span>
+                                <span class="projects__tech">Redux</span>
                             </div>
-                            <div class="project__links">
-                                <a href="#" class="project__link">
+                            <div class="projects__buttons">
+                                <a href="#" class="projects__button">
                                     <i class="fas fa-external-link-alt"></i> Demo
                                 </a>
-                                <a href="#" class="project__link">
+                                <a href="#" class="projects__button">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project__card" data-category="design">
-                        <div class="project__image">
+                    <!-- Project 3 -->
+                    <div class="projects__card" data-category="design">
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #2563eb, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                             <i class="fas fa-palette"></i>
                         </div>
-                        <div class="project__content">
-                            <h3 class="project__title">Brand Identity Design</h3>
-                            <p class="project__description">
-                                Complete brand identity design including logo, color palette, and marketing materials.
-                            </p>
-                            <div class="project__tech">
-                                <span class="tech__tag">Figma</span>
-                                <span class="tech__tag">Photoshop</span>
-                                <span class="tech__tag">Illustrator</span>
+                        <div class="projects__data">
+                            <h3 class="projects__title">Brand Identity Design</h3>
+                            <p class="projects__description">Complete brand identity design including logo, color
+                                palette, and marketing materials.</p>
+                            <div class="projects__technologies">
+                                <span class="projects__tech">Figma</span>
+                                <span class="projects__tech">Photoshop</span>
+                                <span class="projects__tech">Illustrator</span>
                             </div>
-                            <div class="project__links">
-                                <a href="#" class="project__link">
+                            <div class="projects__buttons">
+                                <a href="#" class="projects__button">
                                     <i class="fas fa-external-link-alt"></i> Demo
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project__card" data-category="web">
-                        <div class="project__image">
+                    <!-- Project 4 -->
+                    <div class="projects__card" data-category="web">
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #2563eb, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                             <i class="fas fa-cloud-sun"></i>
                         </div>
-                        <div class="project__content">
-                            <h3 class="project__title">Weather Dashboard</h3>
-                            <p class="project__description">
-                                A responsive weather dashboard with location-based forecasts and interactive charts.
-                            </p>
-                            <div class="project__tech">
-                                <span class="tech__tag">HTML5</span>
-                                <span class="tech__tag">CSS3</span>
-                                <span class="tech__tag">JavaScript</span>
-                                <span class="tech__tag">Chart.js</span>
+                        <div class="projects__data">
+                            <h3 class="projects__title">Weather Dashboard</h3>
+                            <p class="projects__description">A responsive weather dashboard with location-based
+                                forecasts and interactive charts.</p>
+                            <div class="projects__technologies">
+                                <span class="projects__tech">HTML5</span>
+                                <span class="projects__tech">CSS3</span>
+                                <span class="projects__tech">JavaScript</span>
+                                <span class="projects__tech">Chart.js</span>
                             </div>
-                            <div class="project__links">
-                                <a href="#" class="project__link">
+                            <div class="projects__buttons">
+                                <a href="#" class="projects__button">
                                     <i class="fas fa-external-link-alt"></i> Demo
                                 </a>
-                                <a href="#" class="project__link">
+                                <a href="#" class="projects__button">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project__card" data-category="web">
-                        <div class="project__image">
+                    <!-- Project 5 -->
+                    <div class="projects__card" data-category="web">
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #2563eb, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                             <i class="fas fa-user"></i>
                         </div>
-                        <div class="project__content">
-                            <h3 class="project__title">Portfolio Website</h3>
-                            <p class="project__description">
-                                A responsive portfolio website showcasing creative work with smooth animations.
-                            </p>
-                            <div class="project__tech">
-                                <span class="tech__tag">HTML5</span>
-                                <span class="tech__tag">CSS3</span>
-                                <span class="tech__tag">JavaScript</span>
-                                <span class="tech__tag">GSAP</span>
+                        <div class="projects__data">
+                            <h3 class="projects__title">Portfolio Website</h3>
+                            <p class="projects__description">A responsive portfolio website showcasing creative work
+                                with smooth animations.</p>
+                            <div class="projects__technologies">
+                                <span class="projects__tech">HTML5</span>
+                                <span class="projects__tech">CSS3</span>
+                                <span class="projects__tech">JavaScript</span>
+                                <span class="projects__tech">GSAP</span>
                             </div>
-                            <div class="project__links">
-                                <a href="#" class="project__link">
+                            <div class="projects__buttons">
+                                <a href="#" class="projects__button">
                                     <i class="fas fa-external-link-alt"></i> Demo
                                 </a>
-                                <a href="#" class="project__link">
+                                <a href="#" class="projects__button">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project__card" data-category="design">
-                        <div class="project__image">
+                    <!-- Project 6 -->
+                    <div class="projects__card" data-category="design">
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #2563eb, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
-                        <div class="project__content">
-                            <h3 class="project__title">Mobile Banking App UI</h3>
-                            <p class="project__description">
-                                Modern mobile banking app interface design with focus on user experience and security.
-                            </p>
-                            <div class="project__tech">
-                                <span class="tech__tag">Figma</span>
-                                <span class="tech__tag">Sketch</span>
-                                <span class="tech__tag">Principle</span>
+                        <div class="projects__data">
+                            <h3 class="projects__title">Mobile Banking App UI</h3>
+                            <p class="projects__description">Modern mobile banking app interface design with focus on
+                                user experience and security.</p>
+                            <div class="projects__technologies">
+                                <span class="projects__tech">Figma</span>
+                                <span class="projects__tech">Sketch</span>
+                                <span class="projects__tech">Principle</span>
                             </div>
-                            <div class="project__links">
-                                <a href="#" class="project__link">
+                            <div class="projects__buttons">
+                                <a href="#" class="projects__button">
                                     <i class="fas fa-external-link-alt"></i> Demo
                                 </a>
                             </div>
@@ -931,57 +1014,75 @@
         <section class="contact section" id="contact">
             <div class="container">
                 <h2 class="section__title">Contact Me</h2>
-                <p class="section__subtitle">Get in touch</p>
+                <span class="section__subtitle">Get in touch</span>
 
                 <div class="contact__content">
                     <div class="contact__info">
                         <div class="contact__card">
-                            <i class="fas fa-envelope contact__icon"></i>
-                            <h3 class="contact__title">Email</h3>
-                            <p class="contact__data">sonu@example.com</p>
-                            <a href="mailto:sonu@example.com" class="button button--primary">
+                            <i class="fas fa-envelope contact__card-icon"></i>
+                            <h3 class="contact__card-title">Email</h3>
+                            <span class="contact__card-data">sonu@example.com</span>
+                            <a href="mailto:sonu@example.com" class="contact__button">
                                 Write me <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
 
                         <div class="contact__card">
-                            <i class="fab fa-whatsapp contact__icon"></i>
-                            <h3 class="contact__title">WhatsApp</h3>
-                            <p class="contact__data">+1-234-567-8900</p>
-                            <a href="https://api.whatsapp.com/send?phone=1234567890" class="button button--primary">
+                            <i class="fab fa-whatsapp contact__card-icon"></i>
+                            <h3 class="contact__card-title">WhatsApp</h3>
+                            <span class="contact__card-data">+1-234-567-8900</span>
+                            <a href="https://api.whatsapp.com/send?phone=1234567890" class="contact__button">
                                 Write me <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
 
                         <div class="contact__card">
-                            <i class="fab fa-linkedin contact__icon"></i>
-                            <h3 class="contact__title">LinkedIn</h3>
-                            <p class="contact__data">sonu-abraham</p>
-                            <a href="https://linkedin.com/in/sonu-abraham" class="button button--primary">
+                            <i class="fab fa-linkedin contact__card-icon"></i>
+                            <h3 class="contact__card-title">LinkedIn</h3>
+                            <span class="contact__card-data">sonu-abraham</span>
+                            <a href="https://linkedin.com/in/sonu-abraham" class="contact__button">
                                 Write me <i class="fas fa-arrow-right"></i>
                             </a>
+                        </div>
+
+                        <div class="contact__social">
+                            <h3 class="contact__social-title">Connect with me</h3>
+                            <div class="contact__social-links">
+                                <a href="https://github.com/sonu-abraham" class="contact__social-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/sonu-abraham" class="contact__social-link">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://twitter.com/sonu_abraham" class="contact__social-link">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://instagram.com/sonu_abraham" class="contact__social-link">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <form class="contact__form">
-                        <div class="form__group">
-                            <label for="name" class="form__label">Name *</label>
-                            <input type="text" id="name" name="name" class="form__input" required>
+                        <div class="contact__form-div">
+                            <label class="contact__form-tag">Name *</label>
+                            <input type="text" name="name" class="contact__form-input" required>
                         </div>
 
-                        <div class="form__group">
-                            <label for="email" class="form__label">Email *</label>
-                            <input type="email" id="email" name="email" class="form__input" required>
+                        <div class="contact__form-div">
+                            <label class="contact__form-tag">Email *</label>
+                            <input type="email" name="email" class="contact__form-input" required>
                         </div>
 
-                        <div class="form__group">
-                            <label for="subject" class="form__label">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form__input">
+                        <div class="contact__form-div">
+                            <label class="contact__form-tag">Subject</label>
+                            <input type="text" name="subject" class="contact__form-input">
                         </div>
 
-                        <div class="form__group">
-                            <label for="message" class="form__label">Message *</label>
-                            <textarea id="message" name="message" class="form__textarea" required></textarea>
+                        <div class="contact__form-div">
+                            <label class="contact__form-tag">Message *</label>
+                            <textarea name="message" class="contact__form-input" rows="6" required></textarea>
                         </div>
 
                         <button type="submit" class="button button--primary">
@@ -997,82 +1098,49 @@
     <footer class="footer">
         <div class="container">
             <h2 class="footer__title">Sonu Abraham</h2>
-
-            <div class="footer__links">
-                <a href="#about" class="footer__link">About</a>
-                <a href="#projects" class="footer__link">Projects</a>
-                <a href="#contact" class="footer__link">Contact</a>
-            </div>
-
+            <ul class="footer__list">
+                <li><a href="#about" class="footer__link">About</a></li>
+                <li><a href="#projects" class="footer__link">Projects</a></li>
+                <li><a href="#contact" class="footer__link">Contact</a></li>
+            </ul>
             <div class="footer__social">
-                <a href="https://linkedin.com/in/sonu-abraham" class="social__link">
+                <a href="https://linkedin.com/in/sonu-abraham" class="footer__social-link">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com/sonu-abraham" class="social__link">
+                <a href="https://github.com/sonu-abraham" class="footer__social-link">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://twitter.com/sonu_abraham" class="social__link">
+                <a href="https://twitter.com/sonu_abraham" class="footer__social-link">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="https://instagram.com/sonu_abraham" class="social__link">
-                    <i class="fab fa-instagram"></i>
-                </a>
             </div>
-
-            <p class="footer__copy">© 2024 Sonu Abraham. All rights reserved</p>
+            <span class="footer__copy">© 2024 Sonu Abraham. All rights reserved</span>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Simple navigation functionality
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Active navigation highlighting
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav__link');
-
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
         // Project filtering
-        const filterButtons = document.querySelectorAll('.projects__filter');
-        const projectCards = document.querySelectorAll('.project__card');
+        const filterButtons = document.querySelectorAll('.projects__item');
+        const projectCards = document.querySelectorAll('.projects__card');
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.getAttribute('data-filter');
 
-                // Update active filter button
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
+                filterButtons.forEach(btn => btn.classList.remove('active-work'));
+                button.classList.add('active-work');
 
-                // Filter projects
                 projectCards.forEach(card => {
                     const category = card.getAttribute('data-category');
                     if (filter === 'all' || filter === category) {

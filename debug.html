@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Portfolio Issues</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .warning {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Portfolio Debug Report</h1>
+
+    <div class="test-section">
+        <h2>CSS Files Loading Test</h2>
+        <div id="css-test">Testing CSS files...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>JavaScript Files Loading Test</h2>
+        <div id="js-test">Testing JavaScript files...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Image Files Test</h2>
+        <div id="image-test">Testing image files...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Font Loading Test</h2>
+        <div id="font-test">Testing Google Fonts...</div>
+    </div>
+
+    <script>
+        // Test CSS loading
+        function testCSS() {
+            const cssFiles = ['css/styles.css', 'css/responsive.css', 'css/animations.css'];
+            const cssTest = document.getElementById('css-test');
+            let results = '';
+
+            cssFiles.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            results += `<div class="success">✓ ${file} - OK</div>`;
+                        } else {
+                            results += `<div class="error">✗ ${file} - Failed (${response.status})</div>`;
+                        }
+                        cssTest.innerHTML = results;
+                    })
+                    .catch(error => {
+                        results += `<div class="error">✗ ${file} - Error: ${error.message}</div>`;
+                        cssTest.innerHTML = results;
+                    });
+            });
+        }
+
+        // Test JavaScript loading
+        function testJS() {
+            const jsFiles = ['js/main.js', 'js/animations.js'];
+            const jsTest = document.getElementById('js-test');
+            let results = '';
+
+            jsFiles.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            results += `<div class="success">✓ ${file} - OK</div>`;
+                        } else {
+                            results += `<div class="error">✗ ${file} - Failed (${response.status})</div>`;
+                        }
+                        jsTest.innerHTML = results;
+                    })
+                    .catch(error => {
+                        results += `<div class="error">✗ ${file} - Error: ${error.message}</div>`;
+                        jsTest.innerHTML = results;
+                    });
+            });
+        }
+
+        // Test images
+        function testImages() {
+            const images = ['images/profile.svg', 'images/projects/project1.jpg'];
+            const imageTest = document.getElementById('image-test');
+            let results = '';
+
+            images.forEach(file => {
+                const img = new Image();
+                img.onload = function () {
+                    results += `<div class="success">✓ ${file} - OK</div>`;
+                    imageTest.innerHTML = results;
+                };
+                img.onerror = function () {
+                    results += `<div class="error">✗ ${file} - Failed to load</div>`;
+                    imageTest.innerHTML = results;
+                };
+                img.src = file;
+            });
+        }
+
+        // Test fonts
+        function testFonts() {
+            const fontTest = document.getElementById('font-test');
+
+            // Check if Inter font is loaded
+            if (document.fonts) {
+                document.fonts.ready.then(() => {
+                    const interFont = document.fonts.check('16px Inter');
+                    if (interFont) {
+                        fontTest.innerHTML = '<div class="success">✓ Inter font loaded</div>';
+                    } else {
+                        fontTest.innerHTML = '<div class="warning">⚠ Inter font not loaded, using fallback</div>';
+                    }
+                });
+            } else {
+                fontTest.innerHTML = '<div class="warning">⚠ Font API not supported</div>';
+            }
+        }
+
+        // Run all tests
+        testCSS();
+        testJS();
+        testImages();
+        testFonts();
+
+        // Check for JavaScript errors
+        window.addEventListener('error', function (e) {
+            console.error('JavaScript Error:', e.error);
+            document.body.innerHTML += `<div class="test-section"><h2>JavaScript Error Detected</h2><div class="error">Error: ${e.message}<br>File: ${e.filename}<br>Line: ${e.lineno}</div></div>`;
+        });
+    </script>
+</body>
+
+</html>

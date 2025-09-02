@@ -1,0 +1,4 @@
+This file serves as a placeholder for the images directory.
+The profile.jpg image should be placed in this directory for the hero section.
+
+For now, the hero section will show a placeholder if the profile.jpg image is not found.
