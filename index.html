@@ -303,6 +303,74 @@
             transition: width 2s ease;
         }
 
+        /* Certifications */
+        .certifications {
+            background-color: #0f172a;
+        }
+
+        .certifications__content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certifications__card {
+            background: #334155;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .certifications__card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(5, 150, 105, 0.2);
+            border-color: #059669;
+        }
+
+        .certifications__badge {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .certifications__icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .certifications__card:hover .certifications__icon {
+            transform: scale(1.05);
+        }
+
+        .certifications__title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .certifications__level {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .certifications__description {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
         /* Projects */
         .projects__filters {
             display: flex;
@@ -673,6 +741,7 @@
             <ul class="nav__list">
                 <li><a href="#home" class="nav__link active-link">Home</a></li>
                 <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#certifications" class="nav__link">Certifications</a></li>
                 <li><a href="#projects" class="nav__link">Projects</a></li>
                 <li><a href="#contact" class="nav__link">Contact</a></li>
             </ul>
@@ -865,6 +934,60 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWS Certifications Section -->
+        <section class="certifications section" id="certifications">
+            <div class="container">
+                <h2 class="section__title">AWS Certifications</h2>
+                <span class="section__subtitle">Professional credentials and expertise</span>
+
+                <div class="certifications__content">
+                    <div class="certifications__card">
+                        <div class="certifications__badge">
+                            <img src="https://images.credly.com/size/340x340/images/bd31ef42-d460-493e-8503-39592aaf0458/image.png"
+                                alt="AWS Certified DevOps Engineer - Professional" class="certifications__icon">
+                        </div>
+                        <h3 class="certifications__title">AWS Certified DevOps Engineer</h3>
+                        <p class="certifications__level">Professional</p>
+                        <p class="certifications__description">Advanced expertise in provisioning, operating, and
+                            managing distributed application systems on AWS</p>
+                    </div>
+
+                    <div class="certifications__card">
+                        <div class="certifications__badge">
+                            <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
+                                alt="AWS Certified Solutions Architect - Associate" class="certifications__icon">
+                        </div>
+                        <h3 class="certifications__title">AWS Certified Solutions Architect</h3>
+                        <p class="certifications__level">Associate</p>
+                        <p class="certifications__description">Expertise in designing distributed systems and
+                            applications on AWS platform</p>
+                    </div>
+
+                    <div class="certifications__card">
+                        <div class="certifications__badge">
+                            <img src="https://images.credly.com/size/340x340/images/f0d3fbb9-bfa7-4017-9989-7bde8eaf42b1/image.png"
+                                alt="AWS Certified SysOps Administrator - Associate" class="certifications__icon">
+                        </div>
+                        <h3 class="certifications__title">AWS Certified SysOps Administrator</h3>
+                        <p class="certifications__level">Associate</p>
+                        <p class="certifications__description">Proficiency in deployment, management, and operations on
+                            AWS</p>
+                    </div>
+
+                    <div class="certifications__card">
+                        <div class="certifications__badge">
+                            <img src="https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png"
+                                alt="AWS Certified Developer - Associate" class="certifications__icon">
+                        </div>
+                        <h3 class="certifications__title">AWS Certified Developer</h3>
+                        <p class="certifications__level">Associate</p>
+                        <p class="certifications__description">Skills in developing and maintaining applications on AWS
+                            platform</p>
                     </div>
                 </div>
             </div>
@@ -1093,7 +1216,7 @@
                         <div class="contact__social">
                             <h3 class="contact__social-title">Connect with me</h3>
                             <div class="contact__social-links">
-                                <a href="https://github.com/sonu-abraham" target="_blank" class="contact__social-link">
+                                <a href="https://github.com/sonuabraham" target="_blank" class="contact__social-link">
                                     <i class="fab fa-github"></i>
                                 </a>
                                 <a href="https://www.linkedin.com/in/sonu-abraham-b4066a19" target="_blank"
@@ -1154,7 +1277,7 @@
                 <a href="https://www.linkedin.com/in/sonu-abraham-b4066a19" target="_blank" class="footer__social-link">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com/sonu-abraham" target="_blank" class="footer__social-link">
+                <a href="https://github.com/sonuabraham" target="_blank" class="footer__social-link">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="https://twitter.com/sonu_abraham" target="_blank" class="footer__social-link">
