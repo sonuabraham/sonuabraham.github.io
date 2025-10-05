@@ -577,6 +577,18 @@
             color: white;
         }
 
+        .contact__social-link.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .footer__social-link.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         .contact__form {
             background: #334155;
             padding: 2rem;
@@ -1020,6 +1032,20 @@
                 <span class="section__subtitle">Professional credentials and expertise</span>
 
                 <div class="certifications__content">
+                    <a href="https://www.credly.com/badges/1163f8fe-5d5f-47db-be86-0bebb72246dd/public_url"
+                        target="_blank" class="certifications__link">
+                        <div class="certifications__card">
+                            <div class="certifications__badge">
+                                <img src="https://images.credly.com/size/340x340/images/53acdae5-d69f-4dda-b650-d02ed7a50dd7/image.png"
+                                    alt="AWS Certified Security - Specialty" class="certifications__icon">
+                            </div>
+                            <h3 class="certifications__title">AWS Certified Security</h3>
+                            <p class="certifications__level">Specialty</p>
+                            <p class="certifications__description">Advanced expertise in securing AWS workloads, data
+                                classification, encryption, and incident response</p>
+                        </div>
+                    </a>
+
                     <a href="https://www.credly.com/badges/d45b57bc-0d8e-4b9e-97a0-91046c67742a/public_url"
                         target="_blank" class="certifications__link">
                         <div class="certifications__card">
@@ -1311,13 +1337,12 @@
                                     class="contact__social-link">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="https://twitter.com/sonu_abraham" target="_blank" class="contact__social-link">
+                                <span class="contact__social-link disabled" title="Coming Soon">
                                     <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="https://instagram.com/sonu_abraham" target="_blank"
-                                    class="contact__social-link">
+                                </span>
+                                <span class="contact__social-link disabled" title="Coming Soon">
                                     <i class="fab fa-instagram"></i>
-                                </a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1382,9 +1407,9 @@
                 <a href="https://github.com/sonuabraham" target="_blank" class="footer__social-link">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://twitter.com/sonu_abraham" target="_blank" class="footer__social-link">
+                <span class="footer__social-link disabled" title="Coming Soon">
                     <i class="fab fa-twitter"></i>
-                </a>
+                </span>
             </div>
             <span class="footer__copy">© 2024 Sonu Abraham. All rights reserved</span>
         </div>
