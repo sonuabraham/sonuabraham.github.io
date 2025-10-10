@@ -489,6 +489,114 @@
             transform: translateY(-2px);
         }
 
+        /* Blog */
+        .blog {
+            background-color: #0f172a;
+        }
+
+        .blog__content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog__card {
+            background: #334155;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog__card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(5, 150, 105, 0.2);
+        }
+
+        .blog__data {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .blog__platform {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(5, 150, 105, 0.1);
+            color: #059669;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .blog__date {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .blog__title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+
+        .blog__title a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .blog__title a:hover {
+            color: #059669;
+        }
+
+        .blog__excerpt {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .blog__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #059669;
+            text-decoration: none;
+            font-weight: 500;
+            transition: gap 0.3s;
+        }
+
+        .blog__link:hover {
+            gap: 0.75rem;
+        }
+
+        .blog__cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .blog__cta-text {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
         /* Contact */
         .contact {
             background: #1e293b;
@@ -842,6 +950,7 @@
                 <li><a href="#about" class="nav__link">About</a></li>
                 <li><a href="#certifications" class="nav__link">Certifications</a></li>
                 <li><a href="#projects" class="nav__link">Projects</a></li>
+                <li><a href="#blog" class="nav__link">Blog</a></li>
                 <li><a href="#contact" class="nav__link">Contact</a></li>
             </ul>
         </nav>
@@ -1343,6 +1452,100 @@
             </div>
         </section>
 
+        <!-- Blog Section -->
+        <section class="blog section" id="blog">
+            <div class="container">
+                <h2 class="section__title">Blog</h2>
+                <span class="section__subtitle">Latest articles and insights</span>
+
+                <div class="blog__content">
+                    <!-- Blog Post 1 -->
+                    <div class="blog__card">
+                        <div class="blog__data">
+                            <div class="blog__header">
+                                <span class="blog__platform">
+                                    <i class="fab fa-blogger"></i> Blogspot
+                                </span>
+                                <span class="blog__date">July 3, 2015</span>
+                            </div>
+                            <h3 class="blog__title">
+                                <a href="http://sonuabraham.blogspot.com/2015/07/how-to-enable-root-in-ubuntu-1204.html"
+                                    target="_blank">
+                                    How to Enable Root in Ubuntu 12.04
+                                </a>
+                            </h3>
+                            <p class="blog__excerpt">
+                                A comprehensive guide on enabling the root account in Ubuntu 12.04. Learn about the
+                                security implications and step-by-step instructions for network administrators.
+                            </p>
+                            <a href="http://sonuabraham.blogspot.com/2015/07/how-to-enable-root-in-ubuntu-1204.html"
+                                target="_blank" class="blog__link">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 2 -->
+                    <div class="blog__card">
+                        <div class="blog__data">
+                            <div class="blog__header">
+                                <span class="blog__platform">
+                                    <i class="fab fa-blogger"></i> Blogspot
+                                </span>
+                                <span class="blog__date">March 18, 2013</span>
+                            </div>
+                            <h3 class="blog__title">
+                                <a href="http://sonuabraham.blogspot.com/2013/03/kexec-and-kdump.html" target="_blank">
+                                    Kexec and Kdump
+                                </a>
+                            </h3>
+                            <p class="blog__excerpt">
+                                Understanding Kexec and Kdump mechanisms in Linux for kernel crash analysis and system
+                                debugging. Essential knowledge for system administrators.
+                            </p>
+                            <a href="http://sonuabraham.blogspot.com/2013/03/kexec-and-kdump.html" target="_blank"
+                                class="blog__link">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 3 -->
+                    <div class="blog__card">
+                        <div class="blog__data">
+                            <div class="blog__header">
+                                <span class="blog__platform">
+                                    <i class="fab fa-blogger"></i> Blogspot
+                                </span>
+                                <span class="blog__date">August 23, 2012</span>
+                            </div>
+                            <h3 class="blog__title">
+                                <a href="http://sonuabraham.blogspot.com/2012/08/compiling-linux-kernel.html"
+                                    target="_blank">
+                                    Compiling Linux Kernel
+                                </a>
+                            </h3>
+                            <p class="blog__excerpt">
+                                Step-by-step tutorial on compiling the Linux kernel from source. Learn the process of
+                                customizing and building your own kernel.
+                            </p>
+                            <a href="http://sonuabraham.blogspot.com/2012/08/compiling-linux-kernel.html"
+                                target="_blank" class="blog__link">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog__cta">
+                    <p class="blog__cta-text">Want to read more articles?</p>
+                    <a href="http://sonuabraham.blogspot.com" target="_blank" class="button button--primary">
+                        Visit My Blog <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="contact section" id="contact">
             <div class="container">
@@ -1451,6 +1654,7 @@
             <ul class="footer__list">
                 <li><a href="#about" class="footer__link">About</a></li>
                 <li><a href="#projects" class="footer__link">Projects</a></li>
+                <li><a href="#blog" class="footer__link">Blog</a></li>
                 <li><a href="#contact" class="footer__link">Contact</a></li>
             </ul>
             <div class="footer__social">
